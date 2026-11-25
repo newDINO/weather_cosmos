@@ -262,7 +262,7 @@ svg {
 
 .brand-text__en {
   margin-top: 3px;
-  font-size: 8px;
+  font-size: 10.5px;
   letter-spacing: 0.26em;
   color: var(--faint);
 }
@@ -304,7 +304,7 @@ svg {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--faint);
 }
 
@@ -328,7 +328,7 @@ svg {
 
 /* 4. 通用元素 */
 .eyebrow {
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.24em;
   color: var(--muted);
@@ -407,7 +407,7 @@ svg {
 }
 
 .card__title {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.16em;
   color: var(--muted);
@@ -416,13 +416,13 @@ svg {
 
 .card__subtitle {
   margin-top: 4px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
 }
 
 .card__aside {
   padding-top: 2px;
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.12em;
   color: var(--faint);
   text-transform: uppercase;
@@ -433,7 +433,7 @@ svg {
   margin-top: 16px;
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.65;
   color: var(--faint);
 }
@@ -625,7 +625,7 @@ svg {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 34px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   color: var(--faint);
 }
 
@@ -674,7 +674,7 @@ svg {
 }
 
 .home-hero__now-label {
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--faint);
@@ -691,7 +691,7 @@ svg {
 }
 
 .home-hero__now-temp span {
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 400;
   letter-spacing: 0;
   color: var(--muted);
@@ -719,7 +719,7 @@ svg {
 }
 
 .section-head p {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--faint);
 }
 
@@ -776,7 +776,7 @@ svg {
 }
 
 .body-card__kind {
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
@@ -791,7 +791,7 @@ svg {
 
 .body-card__en {
   margin-top: 2px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
 }
 
@@ -821,7 +821,7 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -832,13 +832,13 @@ svg {
   margin-top: 14px;
   padding-top: 11px;
   border-top: 1px solid rgba(255, 255, 255, 0.09);
-  font-size: 11px;
+  font-size: 12.5px;
   color: var(--muted);
 }
 
 .body-card__station {
   margin-top: 7px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--faint);
 }
 
@@ -875,7 +875,7 @@ svg {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--muted);
@@ -935,11 +935,11 @@ svg {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
-  font-size: 12px;
+  font-size: 12.5px;
 }
 
 .chip__label {
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   color: var(--faint);
 }
@@ -959,20 +959,20 @@ svg {
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   border-radius: 14px;
   background: color-mix(in srgb, var(--accent) 11%, transparent);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.86);
 }
 
 .hero__alert-mark {
   flex: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin-top: 1px;
   border-radius: 50%;
   background: var(--accent);
   color: #0a0f18;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   display: grid;
   place-items: center;
@@ -995,7 +995,7 @@ svg {
   border-radius: 999px;
   background: rgba(8, 12, 20, 0.45);
   backdrop-filter: blur(8px);
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.14em;
   color: var(--muted);
   text-transform: uppercase;
@@ -1007,7 +1007,7 @@ svg {
 
 .hero__note {
   margin: 6px 0 28px;
-  font-size: 11px;
+  font-size: 12.5px;
   color: var(--faint);
 }
 
@@ -1074,7 +1074,7 @@ svg {
 }
 
 .hourly__time {
-  font-size: 10.5px;
+  font-size: 11.5px;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -1086,7 +1086,7 @@ svg {
 
 .hourly__event {
   min-height: 13px;
-  font-size: 9.5px;
+  font-size: 11.5px;
   color: rgba(160, 205, 255, 0.75);
   font-variant-numeric: tabular-nums;
 }
@@ -1106,7 +1106,7 @@ svg {
   gap: 10px;
   padding: 10px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
-  font-size: 12.5px;
+  font-size: 13px;
 }
 
 .daily__row:first-child {
@@ -1124,7 +1124,7 @@ svg {
 }
 
 .daily__event {
-  font-size: 10.5px;
+  font-size: 11.5px;
   color: rgba(160, 205, 255, 0.72);
   font-variant-numeric: tabular-nums;
 }
@@ -1179,7 +1179,7 @@ svg {
 }
 
 .detail__label {
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   color: var(--faint);
   text-transform: uppercase;
@@ -1195,7 +1195,7 @@ svg {
 
 .detail__sub {
   margin-top: 4px;
-  font-size: 10px;
+  font-size: 11.5px;
   line-height: 1.4;
   color: var(--faint);
 }
@@ -1227,7 +1227,7 @@ svg {
 }
 
 .fact dt {
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.12em;
   color: var(--faint);
   text-transform: uppercase;
@@ -1267,7 +1267,7 @@ svg {
 }
 
 .timeline__year {
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   color: var(--accent);
 }
@@ -1298,7 +1298,7 @@ svg {
 
 .sources__label {
   margin-right: 4px;
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.14em;
   color: var(--faint);
   text-transform: uppercase;
@@ -1308,7 +1308,7 @@ svg {
   padding: 6px 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
@@ -1321,7 +1321,7 @@ svg {
 
 .observations__note {
   margin-top: 16px;
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.65;
   color: var(--faint);
 }
@@ -1351,7 +1351,7 @@ svg {
 }
 
 .pager__direction {
-  font-size: 9.5px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   color: var(--faint);
 }
@@ -1394,7 +1394,7 @@ svg {
 
 .about__updated {
   margin-top: 12px;
-  font-size: 10.5px;
+  font-size: 12px;
   color: var(--faint);
 }
 
@@ -1458,7 +1458,7 @@ svg {
 }
 
 .about__sources a {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -1614,17 +1614,17 @@ svg {
   }
 
   .hero__alert {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .daily__row {
-    grid-template-columns: 44px 24px 34px 32px minmax(36px, 1fr) 32px;
+    grid-template-columns: 46px 24px 34px 32px minmax(36px, 1fr) 32px;
     gap: 6px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .daily__event {
-    font-size: 9.5px;
+    font-size: 11.5px;
   }
 
   .detail {
@@ -1655,7 +1655,7 @@ svg {
 
 @media (max-width: 380px) {
   .daily__row {
-    grid-template-columns: 44px 24px 32px minmax(30px, 1fr) 32px;
+    grid-template-columns: 48px 24px 32px minmax(30px, 1fr) 32px;
   }
 
   .daily__event {
@@ -1681,7 +1681,7 @@ svg {
   }
 
   .hero__chips li {
-    font-size: 11px;
+    font-size: 12.5px;
   }
 
   .hourly__item {
