@@ -1366,6 +1366,129 @@ svg {
   text-align: right;
 }
 
+/* 7.5 行星与卫星之间的跳转 */
+.parent-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.parent-link:hover {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: var(--line-strong);
+}
+
+.parent-link__copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  min-width: 0;
+}
+
+.parent-link__label {
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+  text-transform: uppercase;
+}
+
+.parent-link__name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.parent-link__en {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.parent-link__action {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.relations {
+  padding: 22px 24px;
+}
+
+.relations__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.relation:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--line-strong);
+}
+
+.relation__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.relation__name {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.relation__station {
+  font-size: 12px;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.relation__weather {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.relation__temp {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.relation__condition {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.relation__arrow {
+  font-size: 14px;
+  color: var(--faint);
+}
+
 /* 8. 关于 */
 .about {
   padding-top: 54px;
@@ -1577,6 +1700,16 @@ svg {
   }
 }
 
+@media (max-width: 700px) {
+  .parent-link__en {
+    display: none;
+  }
+
+  .relation__condition {
+    display: none;
+  }
+}
+
 @media (max-width: 620px) {
   .body-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -1651,6 +1784,28 @@ svg {
   .about {
     padding-top: 38px;
   }
+
+  .relations {
+    padding: 18px;
+  }
+
+  .relation {
+    gap: 10px;
+    padding: 8px 10px;
+  }
+
+  .relation .orb-wrap {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .relation__arrow {
+    display: none;
+  }
+
+  .parent-link {
+    padding: 9px 12px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -1659,6 +1814,23 @@ svg {
   }
 
   .daily__event {
+    display: none;
+  }
+
+  .relation {
+    gap: 8px;
+  }
+
+  .relation .orb-wrap {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .relation__name {
+    font-size: 14px;
+  }
+
+  .relation__station {
     display: none;
   }
 }

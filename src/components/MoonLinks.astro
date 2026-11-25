@@ -1,0 +1,46 @@
+---
+import { CONDITIONS } from '../lib/conditions';
+import { url } from '../lib/site';
+import type { Body, Forecast } from '../lib/types';
+import Orb from './Orb.astro';
+import WeatherIcon from './WeatherIcon.astro';
+
+interface Props {
+  planet: Body;
+  moons: { body: Body; forecast: Forecast }[];
+}
+
+const { planet, moons } = Astro.props;
+---
+
+<section class="card relations" aria-labelledby="moons-title">
+  <header class="card__head">
+    <div>
+      <h2 class="card__title" id="moons-title">卫星</h2>
+      <p class="card__subtitle">本站收录的{planet.name}卫星 · 共 {moons.length} 颗</p>
+    </div>
+    <span class="card__aside">查看天气 →</span>
+  </header>
+
+  <div class="relations__list">
+    {
+      moons.map(({ body, forecast }) => (
+        <a class="relation" href={url(`weather/${body.id}/`)}>
+          <Orb body={body} size={48} />
+          <span class="relation__copy">
+            <span class="relation__name">{body.name}</span>
+            <span class="relation__station">{body.station}</span>
+          </span>
+          <span class="relation__weather">
+            <WeatherIcon condition={forecast.current.condition} size={22} />
+            <span class="relation__temp">{forecast.current.tempC}°</span>
+            <span class="relation__condition">
+              {CONDITIONS[forecast.current.condition].label}
+            </span>
+          </span>
+          <span class="relation__arrow" aria-hidden="true">→</span>
+        </a>
+      ))
+    }
+  </div>
+</section>

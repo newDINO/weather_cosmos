@@ -1,0 +1,23 @@
+---
+import { url } from '../lib/site';
+import type { Body } from '../lib/types';
+import Orb from './Orb.astro';
+
+interface Props {
+  parent: Body;
+}
+
+const { parent } = Astro.props;
+---
+
+<a class="parent-link" href={url(`weather/${parent.id}/`)}>
+  <Orb body={parent} size={42} />
+  <span class="parent-link__copy">
+    <span class="parent-link__label">母星</span>
+    <span class="parent-link__name">{parent.name}</span>
+    <span class="parent-link__en">{parent.en}</span>
+  </span>
+  <span class="parent-link__action">
+    {parent.name}天气 <span aria-hidden="true">→</span>
+  </span>
+</a>

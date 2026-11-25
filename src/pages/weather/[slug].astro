@@ -3,10 +3,12 @@ import DailyCard from '../../components/DailyCard.astro';
 import DetailsCard from '../../components/DetailsCard.astro';
 import ForecastHero from '../../components/ForecastHero.astro';
 import HourlyCard from '../../components/HourlyCard.astro';
+import MoonLinks from '../../components/MoonLinks.astro';
 import ObservationCard from '../../components/ObservationCard.astro';
 import Pager from '../../components/Pager.astro';
+import ParentLink from '../../components/ParentLink.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { BODIES, getNeighbors } from '../../data/bodies';
+import { BODIES, getMoonsOf, getNeighbors, getParent } from '../../data/bodies';
 import { BUILD_DATE } from '../../lib/format';
 import { createForecast } from '../../lib/simulate';
 import type { Body } from '../../lib/types';
@@ -25,6 +27,11 @@ interface Props {
 const { body } = Astro.props;
 const forecast = createForecast(body, BUILD_DATE);
 const { prev, next } = getNeighbors(body.id);
+const parent = getParent(body);
+const moons = getMoonsOf(body).map((moon) => ({
+  body: moon,
+  forecast: createForecast(moon, BUILD_DATE),
+}));
 ---
 
 <BaseLayout
@@ -35,6 +42,8 @@ const { prev, next } = getNeighbors(body.id);
   <div class="container container--narrow">
     <ForecastHero body={body} forecast={forecast} />
 
+    {parent && <ParentLink parent={parent} />}
+
     <div class="forecast-stack">
       <HourlyCard body={body} forecast={forecast} />
 
@@ -42,6 +51,8 @@ const { prev, next } = getNeighbors(body.id);
         <DailyCard body={body} forecast={forecast} />
         <DetailsCard forecast={forecast} />
       </div>
+
+      {moons.length > 0 && <MoonLinks planet={body} moons={moons} />}
 
       <ObservationCard body={body} />
     </div>
