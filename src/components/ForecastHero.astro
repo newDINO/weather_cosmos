@@ -1,6 +1,7 @@
 ---
 import { CONDITIONS } from '../lib/conditions';
-import { BUILD_DATE_LABEL, url } from '../lib/site';
+import { formatDate } from '../lib/format';
+import { url } from '../lib/site';
 import type { Body, Forecast } from '../lib/types';
 import Orb from './Orb.astro';
 import WeatherIcon from './WeatherIcon.astro';
@@ -64,6 +65,6 @@ const label = CONDITIONS[current.condition].label;
 </section>
 
 <p class="hero__note">
-  温度均为摄氏度 · 依据真实观测参数生成于 {BUILD_DATE_LABEL} · 非实时实测 ·
+  温度均为摄氏度 · 依据真实观测参数生成于 {formatDate(new Date(forecast.generatedAt))} · 非实时实测 ·
   <a href={url('about/')}>了解方法</a>
 </p>
