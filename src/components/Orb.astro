@@ -1,0 +1,30 @@
+---
+import type { Body } from '../lib/types';
+
+interface Props {
+  body: Body;
+  size?: number;
+  class?: string;
+}
+
+const { body, size = 220, class: className = '' } = Astro.props;
+const palette = body.palette;
+
+const style = [
+  `--orb1:${palette.orb1}`,
+  `--orb2:${palette.orb2}`,
+  `--orb3:${palette.orb3}`,
+  `--orb-glow:${palette.glow}`,
+  `--orb-size:${size}px`,
+].join(';');
+---
+
+<div
+  class:list={['orb-wrap', className]}
+  style={style}
+  data-rings={body.orb.rings ?? 'none'}
+  aria-hidden="true"
+>
+  <span class={`orb orb--${body.orb.style}`}></span>
+  {body.orb.rings && <span class="orb-ring"></span>}
+</div>

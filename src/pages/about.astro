@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BODIES } from '../data/bodies';
+import { BUILD_DATE_LABEL, url } from '../lib/site';
+---
+
+<BaseLayout
+  title="关于 · 星际天气"
+  description="星际天气如何生成外星天气预报：数据来源、模拟方法，以及哪些数字是真的。"
+  active="about"
+>
+  <div class="container container--narrow about">
+    <header class="about__head">
+      <p class="eyebrow">METHOD &amp; SOURCES</p>
+      <h1>关于这份天气</h1>
+      <p class="about__lede">
+        一个把太阳系气候档案做成手机天气 App 的实验。共 {BODIES.length} 个天体，每个天体一张页面。
+      </p>
+      <p class="about__updated">本次版本生成于 {BUILD_DATE_LABEL}</p>
+    </header>
+
+    <section class="card prose">
+      <h2>它是什么</h2>
+      <p>
+        如果给水星、金星、泰坦或冥王星各建一个气象站，它们的“天气预报”会是什么样？
+        这个站点用常见天气 App 的界面语言，把行星科学里的温度、气压、风和季节变化呈现出来。
+      </p>
+      <p>
+        <strong>页面上的逐时曲线、百分比和“今天/明天”是模拟结果，不是实测数据。</strong>
+        没有探测器能实时提供这些天体的逐时预报；这里的模拟只负责把真实观测的量级和规律，翻译成一份可读的日常天气。
+      </p>
+
+      <h2>预报怎么生成</h2>
+      <ol class="prose__list">
+        <li>
+          <strong>真实气候档案。</strong>每个天体都有平均温度、昼夜振幅、典型风速、气压、重力、太阳辐照与常见天气类型，取自 NASA / ESA 公开资料与任务结果。
+        </li>
+        <li>
+          <strong>本地太阳时。</strong>每个天体按自己的自转周期划分“一天”，再切成 24 段作为逐时预报；所以金星的一“小时”比地球长得多。
+        </li>
+        <li>
+          <strong>确定性模拟。</strong>用天体 ID 和日期作为随机种子，生成温度曲线与天气事件。同一天刷新页面，结果不变；换一天，天气会变。
+        </li>
+        <li>
+          <strong>可视化。</strong>天气类型由该天体真实存在的过程决定：火星的沙尘暴、泰坦的甲烷雨、艾奥的火山喷发、土卫二的冰喷泉，而不是地球的天气图标换皮。
+        </li>
+      </ol>
+
+      <h2>哪些数字是真的</h2>
+      <ul class="prose__list">
+        <li>各处“真实观测”里的温度、气压、风速、尺寸与任务时间线，来自公开的行星科学资料。</li>
+        <li>详情面板里的气压、重力、太阳辐照与本地日长，是按真实参数显示的固定值。</li>
+        <li>逐时/7 天温度、天气类型、概率、云量与风的变化，是模拟值。</li>
+        <li>“本地时”按自转周期换算，并加入了一个固定的相位偏移；它表示该站的地方太阳时，不是地球时间。</li>
+      </ul>
+
+      <h2>数据来源</h2>
+      <p>
+        主要参考 NASA Science 的行星与卫星资料页、NASA / ESA 各任务页面，以及公开的行星气候学资料。每张天体页底部都列出了该页具体使用的来源。
+      </p>
+      <div class="about__sources">
+        <a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noreferrer">NASA · Solar System ↗</a>
+        <a href="https://science.nasa.gov/planetary-science/" target="_blank" rel="noreferrer">NASA · Planetary Science ↗</a>
+        <a href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noreferrer">ESA · Space Science ↗</a>
+      </div>
+
+      <h2>边界与免责声明</h2>
+      <p>
+        这不是天气预报，也不能用于任务规划、航天器操作或任何安全决策。气态巨行星的“1 bar
+        参考层”并不是固体表面；不同纬度的温度与风差异很大，页面只展示一个概念性的站点。
+        对外星生命的猜测、云层化学的争议，都被刻意排除在这份轻量版本之外。
+      </p>
+
+      <h2>技术</h2>
+      <p>
+        使用 Astro 静态生成，纯 CSS 与内联 SVG，没有前端框架与追踪脚本。可部署在任意静态托管上，
+        包括 GitHub Pages；构建时生成当日模拟结果。
+      </p>
+      <p class="prose__back">
+        <a class="text-link" href={url('')}>← 返回全部天体</a>
+      </p>
+    </section>
+  </div>
+</BaseLayout>

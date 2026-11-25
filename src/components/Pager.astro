@@ -1,0 +1,22 @@
+---
+import { url } from '../lib/site';
+import type { Body } from '../lib/types';
+
+interface Props {
+  prev: Body;
+  next: Body;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="pager" aria-label="切换天体">
+  <a class="pager__link" href={url(`weather/${prev.id}/`)}>
+    <span class="pager__direction">← 上一个</span>
+    <strong>{prev.name}</strong>
+  </a>
+  <a class="pager__link pager__link--next" href={url(`weather/${next.id}/`)}>
+    <span class="pager__direction">下一个 →</span>
+    <strong>{next.name}</strong>
+  </a>
+</nav>

@@ -1,0 +1,51 @@
+---
+import DailyCard from '../../components/DailyCard.astro';
+import DetailsCard from '../../components/DetailsCard.astro';
+import ForecastHero from '../../components/ForecastHero.astro';
+import HourlyCard from '../../components/HourlyCard.astro';
+import ObservationCard from '../../components/ObservationCard.astro';
+import Pager from '../../components/Pager.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { BODIES, getNeighbors } from '../../data/bodies';
+import { BUILD_DATE } from '../../lib/format';
+import { createForecast } from '../../lib/simulate';
+import type { Body } from '../../lib/types';
+
+export function getStaticPaths() {
+  return BODIES.map((body) => ({
+    params: { slug: body.id },
+    props: { body },
+  }));
+}
+
+interface Props {
+  body: Body;
+}
+
+const { body } = Astro.props;
+const forecast = createForecast(body, BUILD_DATE);
+const { prev, next } = getNeighbors(body.id);
+---
+
+<BaseLayout
+  title={`${body.name}天气 · ${body.station} · 星际天气`}
+  description={`${body.name}（${body.en}）的模拟天气：${body.tagline}。基于 NASA / ESA 真实观测参数生成。`}
+  body={body}
+>
+  <div class="container container--narrow">
+    <ForecastHero body={body} forecast={forecast} />
+
+    <div class="forecast-stack">
+      <HourlyCard body={body} forecast={forecast} />
+
+      <div class="forecast-grid">
+        <DailyCard body={body} forecast={forecast} />
+        <DetailsCard forecast={forecast} />
+      </div>
+
+      <ObservationCard body={body} />
+    </div>
+
+    <Pager prev={prev} next={next} />
+  </div>
+</BaseLayout>

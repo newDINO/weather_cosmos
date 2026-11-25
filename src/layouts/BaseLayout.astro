@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import type { Body } from '../lib/types';
+import { SITE_NAME, url } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  body?: Body;
+  active?: 'home' | 'about';
+}
+
+const { title, description, body, active } = Astro.props;
+const palette = body?.palette;
+
+const themeVars = palette
+  ? [
+      `--sky-top:${palette.skyTop}`,
+      `--sky-mid:${palette.skyMid}`,
+      `--sky-bottom:${palette.skyBottom}`,
+      `--accent:${palette.accent}`,
+      `--glow:${palette.glow}`,
+    ].join(';')
+  : undefined;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content={palette?.skyTop ?? '#080b14'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+  </head>
+  <body style={themeVars}>
+    <div class="sky" aria-hidden="true">
+      <div class="sky__stars"></div>
+      <div class="sky__haze"></div>
+    </div>
+
+    <a class="skip-link" href="#main">跳到正文</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href={url('')} aria-label={`${SITE_NAME}首页`}>
+          <span class="brand-mark" aria-hidden="true"><span class="brand-mark__dot"></span></span>
+          <span class="brand-text">
+            <span class="brand-text__zh">{SITE_NAME}</span>
+            <span class="brand-text__en">EXOWEATHER</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href={url('')} aria-current={active === 'home' ? 'page' : undefined}>天体</a>
+          <a href={url('about/')} aria-current={active === 'about' ? 'page' : undefined}>关于</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>
+          <strong>{SITE_NAME}</strong> · 基于 NASA / ESA 公开观测数据的模拟预报
+        </p>
+        <p class="site-footer__meta">
+          <span>不是真实天气预报</span>
+          <a href={url('about/')}>方法与数据</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

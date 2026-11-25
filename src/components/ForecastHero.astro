@@ -1,0 +1,69 @@
+---
+import { CONDITIONS } from '../lib/conditions';
+import { BUILD_DATE_LABEL, url } from '../lib/site';
+import type { Body, Forecast } from '../lib/types';
+import Orb from './Orb.astro';
+import WeatherIcon from './WeatherIcon.astro';
+
+interface Props {
+  body: Body;
+  forecast: Forecast;
+}
+
+const { body, forecast } = Astro.props;
+const current = forecast.current;
+const label = CONDITIONS[current.condition].label;
+---
+
+<section class="hero" aria-labelledby="current-title">
+  <div class="hero__copy">
+    <p class="hero__eyebrow">
+      <span>{body.name}</span>
+      <span class="hero__slash">/</span>
+      <span>{body.en}</span>
+    </p>
+    <h1 class="hero__station" id="current-title">{body.station}</h1>
+    <div class="hero__temperature">
+      {current.tempC}<span class="hero__degree">°</span>
+    </div>
+    <p class="hero__condition">
+      <WeatherIcon condition={current.condition} size={32} />
+      <span>{label}</span>
+    </p>
+    <p class="hero__range">
+      最高 {current.highC}° <span aria-hidden="true">·</span> 最低 {current.lowC}°
+    </p>
+
+    <ul class="hero__chips" aria-label="当前概况">
+      <li>
+        <span class="chip__label">本地时</span>
+        <span class="chip__value">{current.localTime}</span>
+      </li>
+      <li>
+        <span class="chip__label">风速</span>
+        <span class="chip__value">{current.windKph} km/h</span>
+      </li>
+      <li>
+        <span class="chip__label">{body.climate.eventLabel}</span>
+        <span class="chip__value">{current.eventPct}%</span>
+      </li>
+    </ul>
+
+    {forecast.alert && (
+      <p class="hero__alert">
+        <span class="hero__alert-mark" aria-hidden="true">!</span>
+        {forecast.alert}
+      </p>
+    )}
+  </div>
+
+  <div class="hero__art">
+    <p class="hero__badge">模拟预报</p>
+    <Orb body={body} size={310} class="hero__orb" />
+  </div>
+</section>
+
+<p class="hero__note">
+  温度均为摄氏度 · 依据真实观测参数生成于 {BUILD_DATE_LABEL} · 非实时实测 ·
+  <a href={url('about/')}>了解方法</a>
+</p>

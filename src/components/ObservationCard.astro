@@ -1,0 +1,60 @@
+---
+import type { Body } from '../lib/types';
+
+interface Props {
+  body: Body;
+}
+
+const { body } = Astro.props;
+---
+
+<section class="card observations" aria-labelledby="observations-title">
+  <header class="card__head card__head--stack">
+    <div>
+      <h2 class="card__title" id="observations-title">真实观测</h2>
+      <p class="card__subtitle">模拟的数字不是凭空来的</p>
+    </div>
+    <p class="observations__intro">{body.tagline}。以下数据来自公开的探测任务与行星科学资料。</p>
+  </header>
+
+  <dl class="fact-strip">
+    {
+      body.facts.map((fact) => (
+        <div class="fact">
+          <dt>{fact.label}</dt>
+          <dd>{fact.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <ol class="timeline">
+    {
+      body.observations.map((item) => (
+        <li class="timeline__item">
+          <span class="timeline__year">{item.year}</span>
+          <div class="timeline__body">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="sources">
+    <span class="sources__label">数据来源</span>
+    {
+      body.sources.map((source) => (
+        <a href={source.url} target="_blank" rel="noreferrer">
+          {source.label}
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))
+    }
+  </div>
+
+  <p class="observations__note">
+    页面中的温度曲线、风与天气事件为基于上述观测统计的模拟，不代表任一时刻的真实天气。
+  </p>
+</section>

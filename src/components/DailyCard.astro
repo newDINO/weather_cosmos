@@ -1,0 +1,64 @@
+---
+import { CONDITIONS } from '../lib/conditions';
+import type { Body, Forecast } from '../lib/types';
+import WeatherIcon from './WeatherIcon.astro';
+
+interface Props {
+  body: Body;
+  forecast: Forecast;
+}
+
+const { body, forecast } = Astro.props;
+const lows = forecast.daily.map((day) => day.lowC);
+const highs = forecast.daily.map((day) => day.highC);
+const min = Math.min(...lows);
+const max = Math.max(...highs);
+const span = Math.max(1, max - min);
+
+function rangeStyle(low: number, high: number): string {
+  const start = ((low - min) / span) * 100;
+  const width = Math.max(7, ((high - low) / span) * 100);
+  return `--range-start:${start.toFixed(2)}%;--range-width:${Math.min(100 - start, width).toFixed(2)}%`;
+}
+---
+
+<section class="card daily" aria-labelledby="daily-title">
+  <header class="card__head">
+    <div>
+      <h2 class="card__title" id="daily-title">未来 7 天</h2>
+      <p class="card__subtitle">本地日</p>
+    </div>
+    <span class="card__aside">最低 / 最高</span>
+  </header>
+
+  <ol class="daily__list">
+    {
+      forecast.daily.map((day) => (
+        <li class="daily__row">
+          <span class="daily__label">{day.label}</span>
+          <span class="daily__icon" aria-hidden="true">
+            <WeatherIcon condition={day.condition} size={26} />
+          </span>
+          <span
+            class="daily__event"
+            title={`${body.climate.eventLabel} ${day.eventPct}%`}
+          >
+            {day.eventPct}%
+          </span>
+          <span class="daily__low">{day.lowC}°</span>
+          <span class="daily__bar" style={rangeStyle(day.lowC, day.highC)}>
+            <span class="daily__bar-fill"></span>
+          </span>
+          <span class="daily__high">{day.highC}°</span>
+          <span class="visually-hidden">
+            {CONDITIONS[day.condition].label}，{body.climate.eventLabel} {day.eventPct}%
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="card__foot">
+    7 天均以该天体本地日计；“今天”对应生成时刻所在的本地太阳日。
+  </p>
+</section>

@@ -1,0 +1,49 @@
+---
+import { bodyKindLabel } from '../data/bodies';
+import { CONDITIONS } from '../lib/conditions';
+import { url } from '../lib/site';
+import type { Body, Forecast } from '../lib/types';
+import Orb from './Orb.astro';
+import WeatherIcon from './WeatherIcon.astro';
+
+interface Props {
+  body: Body;
+  forecast: Forecast;
+}
+
+const { body, forecast } = Astro.props;
+const style = [
+  `--card-a:${body.palette.skyTop}`,
+  `--card-b:${body.palette.skyMid}`,
+  `--card-accent:${body.palette.accent}`,
+  `--card-glow:${body.palette.glow}`,
+].join(';');
+---
+
+<a class="body-card" href={url(`weather/${body.id}/`)} style={style}>
+  <span class="body-card__glow" aria-hidden="true"></span>
+
+  <div class="body-card__head">
+    <div>
+      <p class="body-card__kind">{bodyKindLabel(body)}</p>
+      <h3 class="body-card__name">{body.name}</h3>
+      <p class="body-card__en">{body.en}</p>
+    </div>
+    <Orb body={body} size={74} class="body-card__orb" />
+  </div>
+
+  <div class="body-card__weather">
+    <span class="body-card__temp">{forecast.current.tempC}°</span>
+    <span class="body-card__condition">
+      <WeatherIcon condition={forecast.current.condition} size={22} />
+      {CONDITIONS[forecast.current.condition].label}
+    </span>
+  </div>
+
+  <div class="body-card__meta">
+    <span>{forecast.current.windKph} km/h</span>
+    <span>本地时 {forecast.current.localTime}</span>
+  </div>
+
+  <p class="body-card__station">{body.station}</p>
+</a>

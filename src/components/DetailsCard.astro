@@ -1,0 +1,30 @@
+---
+import type { Forecast } from '../lib/types';
+
+interface Props {
+  forecast: Forecast;
+}
+
+const { forecast } = Astro.props;
+---
+
+<section class="card details" aria-labelledby="details-title">
+  <header class="card__head">
+    <div>
+      <h2 class="card__title" id="details-title">当前详情</h2>
+      <p class="card__subtitle">站点参考层</p>
+    </div>
+  </header>
+
+  <dl class="details__grid">
+    {
+      forecast.details.map((detail) => (
+        <div class="detail">
+          <dt class="detail__label">{detail.label}</dt>
+          <dd class="detail__value">{detail.value}</dd>
+          {detail.sub && <dd class="detail__sub">{detail.sub}</dd>}
+        </div>
+      ))
+    }
+  </dl>
+</section>
