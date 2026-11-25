@@ -28,6 +28,7 @@ const hours = [...forecast.hourly.slice(nowHour), ...forecast.hourly.slice(0, no
         <li
           class:list={['hourly__item', { 'hourly__item--now': hour.hour === nowHour }]}
           aria-current={hour.hour === nowHour ? 'time' : undefined}
+          data-hour={hour.hour}
         >
           <span class="hourly__time">{hour.hour === nowHour ? '现在' : hour.label}</span>
           <WeatherIcon condition={hour.condition} size={30} />

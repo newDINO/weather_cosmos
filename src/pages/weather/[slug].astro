@@ -3,6 +3,7 @@ import DailyCard from '../../components/DailyCard.astro';
 import DetailsCard from '../../components/DetailsCard.astro';
 import ForecastHero from '../../components/ForecastHero.astro';
 import HourlyCard from '../../components/HourlyCard.astro';
+import LiveWeather from '../../components/LiveWeather.astro';
 import MoonLinks from '../../components/MoonLinks.astro';
 import ObservationCard from '../../components/ObservationCard.astro';
 import Pager from '../../components/Pager.astro';
@@ -58,5 +59,7 @@ const moons = getMoonsOf(body).map((moon) => ({
     </div>
 
     <Pager prev={prev} next={next} />
+
+    <LiveWeather />
   </div>
 </BaseLayout>

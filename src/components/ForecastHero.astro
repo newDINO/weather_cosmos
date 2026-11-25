@@ -25,37 +25,36 @@ const label = CONDITIONS[current.condition].label;
     </p>
     <h1 class="hero__station" id="current-title">{body.station}</h1>
     <div class="hero__temperature">
-      {current.tempC}<span class="hero__degree">°</span>
+      <span data-f="current-temp">{current.tempC}</span><span class="hero__degree">°</span>
     </div>
     <p class="hero__condition">
       <WeatherIcon condition={current.condition} size={32} />
-      <span>{label}</span>
+      <span data-f="current-condition">{label}</span>
     </p>
     <p class="hero__range">
-      最高 {current.highC}° <span aria-hidden="true">·</span> 最低 {current.lowC}°
+      最高 <span data-f="current-high">{current.highC}</span>° <span aria-hidden="true">·</span>
+      最低 <span data-f="current-low">{current.lowC}</span>°
     </p>
 
     <ul class="hero__chips" aria-label="当前概况">
       <li>
         <span class="chip__label">本地时</span>
-        <span class="chip__value">{current.localTime}</span>
+        <span class="chip__value" data-f="current-time">{current.localTime}</span>
       </li>
       <li>
         <span class="chip__label">风速</span>
-        <span class="chip__value">{current.windKph} km/h</span>
+        <span class="chip__value" data-f="current-wind">{current.windKph} km/h</span>
       </li>
       <li>
         <span class="chip__label">{body.climate.eventLabel}</span>
-        <span class="chip__value">{current.eventPct}%</span>
+        <span class="chip__value" data-f="current-event">{current.eventPct}%</span>
       </li>
     </ul>
 
-    {forecast.alert && (
-      <p class="hero__alert">
-        <span class="hero__alert-mark" aria-hidden="true">!</span>
-        {forecast.alert}
-      </p>
-    )}
+    <p class="hero__alert" data-f="alert" hidden={!forecast.alert}>
+      <span class="hero__alert-mark" aria-hidden="true">!</span>
+      <span data-f="alert-text">{forecast.alert ?? ''}</span>
+    </p>
   </div>
 
   <div class="hero__art">
@@ -65,6 +64,9 @@ const label = CONDITIONS[current.condition].label;
 </section>
 
 <p class="hero__note">
-  温度均为摄氏度 · 依据真实观测参数生成于 {formatDate(new Date(forecast.generatedAt))} · 非实时实测 ·
-  <a href={url('about/')}>了解方法</a>
+  温度均为摄氏度 · 依据真实观测参数生成于
+  <time data-f="generated" datetime={forecast.generatedAt}>
+    {formatDate(new Date(forecast.generatedAt))}
+  </time>
+  · 非实时实测 · <a href={url('about/')}>了解方法</a>
 </p>

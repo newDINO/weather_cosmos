@@ -40,7 +40,7 @@ const themeVars = palette
     <meta property="og:description" content={description} />
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
   </head>
-  <body style={themeVars}>
+  <body style={themeVars} data-body-id={body?.id}>
     <div class="sky" aria-hidden="true">
       <div class="sky__stars"></div>
       <div class="sky__haze"></div>

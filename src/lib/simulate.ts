@@ -1,21 +1,25 @@
 import { CONDITIONS } from './conditions';
 import { clamp, hashString, mulberry32, pickWeighted } from './random';
 import type {
-  Body,
   ConditionId,
   DayPoint,
   Detail,
   Forecast,
+  ForecastSubject,
   HourPoint,
 } from './types';
 
-const DAY_MS = 86_400_000;
 const HOUR_MS = 3_600_000;
 
 const DAY_LABELS = ['今天', '明天', '第 3 天', '第 4 天', '第 5 天', '第 6 天', '第 7 天'];
 
 function pad(value: number): string {
   return String(value).padStart(2, '0');
+}
+
+/** 使用访问者本地日历日期，而不是 UTC 日期 */
+function localDateKey(date: Date): string {
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 
 /** 用 COS 昼夜曲线模拟近地表温度：约 14 时最高、02 时最低 */
@@ -48,11 +52,14 @@ function pressureDetail(hpa: number | null): Detail {
 /**
  * 基于真实气候档案生成一天的“模拟预报”。
  *
- * 同一天 + 同一天体 = 同一份预报（构建可复现）；数据本身不是真实实测，
+ * 同一个本地日期 + 同一天体 = 同一份预报；数据本身不是真实实测，
  * 只保证量级、风、气压等与观测统计一致。
  */
-export function createForecast(body: Body, now: Date = new Date()): Forecast {
-  const dateKey = now.toISOString().slice(0, 10);
+export function createForecast(
+  body: ForecastSubject,
+  now: Date = new Date(),
+): Forecast {
+  const dateKey = localDateKey(now);
   const rng = mulberry32(hashString(`${body.id}|${dateKey}`));
   const climate = body.climate;
 
@@ -222,8 +229,6 @@ export function createForecast(body: Body, now: Date = new Date()): Forecast {
     daily,
     details,
     alert,
-    generatedAt: new Date(
-      Math.floor(now.getTime() / DAY_MS) * DAY_MS,
-    ).toISOString(),
+    generatedAt: now.toISOString(),
   };
 }

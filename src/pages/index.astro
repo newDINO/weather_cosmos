@@ -1,5 +1,6 @@
 ---
 import BodyCard from '../components/BodyCard.astro';
+import LiveWeather from '../components/LiveWeather.astro';
 import Orb from '../components/Orb.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BODIES, MOONS, PLANETS } from '../data/bodies';
@@ -19,7 +20,7 @@ const earthForecast = forecasts.get(earth)!;
 
 <BaseLayout
   title="星际天气 · 太阳系模拟天气预报"
-  description="像看手机天气一样，查看水星、金星、火星、木星、土星、冥王星与著名卫星的天气。基于 NASA / ESA 真实观测参数生成的每日模拟预报。"
+  description="像看手机天气一样，查看水星、金星、火星、木星、土星、冥王星与著名卫星的天气。基于 NASA / ESA 真实观测参数、按浏览器本地时间生成的模拟预报。"
   active="home"
 >
   <div class="container">
@@ -29,15 +30,16 @@ const earthForecast = forecasts.get(earth)!;
         <h1>今天，<br />别的世界<br />天气如何？</h1>
         <p class="home-hero__lede">
           从水星没有大气的外逸层，到海王星的超音速风暴。基于 NASA / ESA
-          实测参数，为 15 个天体生成每日模拟预报。
+          实测参数，为 15 个天体生成模拟预报；打开页面时按你的本地日期重新计算。
         </p>
         <div class="home-hero__actions">
           <a class="button" href="#catalog">浏览全部天体</a>
           <a class="text-link" href={url('about/')}>预报是怎么来的？</a>
         </div>
         <p class="home-hero__meta">
-          更新于 {BUILD_DATE_LABEL} <span aria-hidden="true">·</span> 15 个天体
-          <span aria-hidden="true">·</span> 每日模拟
+          更新于 <time data-f="home-date" datetime={BUILD_DATE.toISOString()}>{BUILD_DATE_LABEL}</time>
+          <span aria-hidden="true">·</span> 15 个天体
+          <span aria-hidden="true">·</span> 按本地时间计算
         </p>
       </div>
 
@@ -47,8 +49,8 @@ const earthForecast = forecasts.get(earth)!;
         <div class="home-hero__now">
           <p class="home-hero__now-label">地球 · 参考浮标</p>
           <p class="home-hero__now-temp">
-            {earthForecast.current.tempC}°
-            <span>{CONDITIONS[earthForecast.current.condition].label}</span>
+            <span data-f="earth-temp">{earthForecast.current.tempC}°</span>
+            <span data-f="earth-condition">{CONDITIONS[earthForecast.current.condition].label}</span>
           </p>
         </div>
       </div>
@@ -89,8 +91,13 @@ const earthForecast = forecasts.get(earth)!;
         温度、气压与风来自探测器与望远镜的长期观测统计，逐时变化和天气事件则是一个确定性的模拟。
       </p>
       <p>
+        页面会在浏览器里按你的本地日期重算一次，不需要等站点重新构建；跨过本地午夜后，“今天”的天气也会自然更新。
+      </p>
+      <p>
         <a class="text-link" href={url('about/')}>阅读方法与数据来源 →</a>
       </p>
     </section>
+
+    <LiveWeather />
   </div>
 </BaseLayout>

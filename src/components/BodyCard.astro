@@ -20,7 +20,7 @@ const style = [
 ].join(';');
 ---
 
-<a class="body-card" href={url(`weather/${body.id}/`)} style={style}>
+<a class="body-card" href={url(`weather/${body.id}/`)} style={style} data-body-id={body.id}>
   <span class="body-card__glow" aria-hidden="true"></span>
 
   <div class="body-card__head">
@@ -33,16 +33,16 @@ const style = [
   </div>
 
   <div class="body-card__weather">
-    <span class="body-card__temp">{forecast.current.tempC}°</span>
-    <span class="body-card__condition">
+    <span class="body-card__temp" data-f="card-temp">{forecast.current.tempC}°</span>
+    <span class="body-card__condition" data-f="card-condition">
       <WeatherIcon condition={forecast.current.condition} size={22} />
-      {CONDITIONS[forecast.current.condition].label}
+      <span data-f="card-condition-label">{CONDITIONS[forecast.current.condition].label}</span>
     </span>
   </div>
 
   <div class="body-card__meta">
-    <span>{forecast.current.windKph} km/h</span>
-    <span>本地时 {forecast.current.localTime}</span>
+    <span data-f="card-wind">{forecast.current.windKph} km/h</span>
+    <span>本地时 <span data-f="card-time">{forecast.current.localTime}</span></span>
   </div>
 
   <p class="body-card__station">{body.station}</p>

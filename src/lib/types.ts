@@ -124,6 +124,12 @@ export interface Body {
   climate: ClimateProfile;
 }
 
+/** 预报引擎真正需要的天体字段，便于序列化到浏览器 */
+export type ForecastSubject = Pick<
+  Body,
+  'id' | 'rotationHours' | 'localPhase' | 'dayLengthLabel' | 'climate'
+>;
+
 export interface HourPoint {
   hour: number;
   label: string;

@@ -19,7 +19,7 @@ const { forecast } = Astro.props;
   <dl class="details__grid">
     {
       forecast.details.map((detail) => (
-        <div class="detail">
+        <div class="detail" data-detail={detail.label}>
           <dt class="detail__label">{detail.label}</dt>
           <dd class="detail__value">{detail.value}</dd>
           {detail.sub && <dd class="detail__sub">{detail.sub}</dd>}

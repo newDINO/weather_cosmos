@@ -3,9 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  schedule:
-    # 每天重建一次，让“今日预报”和构建日期保持新鲜
-    - cron: '20 0 * * *'
   workflow_dispatch:
 
 permissions:

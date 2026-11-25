@@ -964,6 +964,10 @@ svg {
   color: rgba(255, 255, 255, 0.86);
 }
 
+.hero__alert[hidden] {
+  display: none;
+}
+
 .hero__alert-mark {
   flex: none;
   width: 20px;

@@ -1,0 +1,17 @@
+---
+import { CONDITIONS } from '../lib/conditions';
+import type { ConditionId } from '../lib/types';
+import WeatherIcon from './WeatherIcon.astro';
+
+const conditions = Object.keys(CONDITIONS) as ConditionId[];
+---
+
+<div hidden aria-hidden="true">
+  {
+    conditions.map((condition) => (
+      <template data-wi={condition}>
+        <WeatherIcon condition={condition} size={32} />
+      </template>
+    ))
+  }
+</div>

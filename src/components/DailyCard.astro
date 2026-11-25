@@ -34,7 +34,7 @@ function rangeStyle(low: number, high: number): string {
   <ol class="daily__list">
     {
       forecast.daily.map((day) => (
-        <li class="daily__row">
+        <li class="daily__row" data-day={day.index}>
           <span class="daily__label">{day.label}</span>
           <span class="daily__icon" aria-hidden="true">
             <WeatherIcon condition={day.condition} size={26} />

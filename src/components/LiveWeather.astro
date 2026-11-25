@@ -1,0 +1,16 @@
+---
+import { BODIES } from '../data/bodies';
+import { toForecastSubject } from '../lib/client-data';
+import IconTemplates from './IconTemplates.astro';
+
+const payload = JSON.stringify(BODIES.map(toForecastSubject)).replaceAll(
+  '<',
+  '\\u003c',
+);
+---
+
+<IconTemplates />
+<script type="application/json" id="live-bodies" set:html={payload}></script>
+<script>
+  import '../scripts/live';
+</script>
