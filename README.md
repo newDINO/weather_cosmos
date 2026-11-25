@@ -17,7 +17,7 @@
 
 ## 技术
 
-- [Astro](https://astro.build/) 7 · 静态生成
+- [Astro](https://astro.build/) 5 · 静态生成
 - TypeScript · 数据与模拟引擎按模块拆分
 - 原生 CSS（渐变、玻璃拟态卡片、内联 SVG 图标）
 
